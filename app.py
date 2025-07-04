@@ -46,7 +46,7 @@ def process_files(uploaded_files, filters, comment_filter):
 
     return combined_df
 
-st.title("CSV Merger and Filter")
+st.title("Data Platform Billing Import Flight Sorter")
 
 uploaded_files = st.file_uploader("Upload CSV or ZIP files", type=['csv', 'zip'], accept_multiple_files=True)
 
