@@ -63,7 +63,7 @@ if st.button("Process Files"):
             st.warning("No data found after processing.")
         else:
             st.success(f"Processed {len(df)} rows.")
-
+            st.dataframe(df)
             # Convert to Excel in-memory
             output = io.BytesIO()
             with pd.ExcelWriter(output, engine='openpyxl') as writer:
@@ -76,4 +76,3 @@ if st.button("Process Files"):
                 file_name="filtered_data.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
-st.dataframe(df)
