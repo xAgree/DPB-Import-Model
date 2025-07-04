@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import zipfile
 import io
+import os
 
 def process_files(uploaded_files, filters, comment_filter):
     dfs = []
