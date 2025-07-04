@@ -58,7 +58,7 @@ st.title("Data Platform Billing Import Flight Sorter")
 
 uploaded_files = st.file_uploader("Upload CSV or ZIP files", type=['csv', 'zip'], accept_multiple_files=True)
 
-filters = st.text_input("Exclude rows containing these codes in 'MSG Flight' (comma separated):", "SKL,LFT,ZKZ,ZKV,ZKN,MDK,FDC,N87,N96,ZKR,N11,VHO,VHX")
+filters = st.text_input("Exclude rows containing these codes in 'MSG Flight' (comma separated):", "SKL,LFT,ZKZ,ZKV,ZKN,MDK,FDC,N87,N96,N72,N81,ZKR,N11,VHO,VHX")
 comment_filter = st.text_input("Exclude rows containing this text in 'Comment':", "Matching flight found")
 
 if st.button("Process Files"):
