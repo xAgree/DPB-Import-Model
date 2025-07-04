@@ -70,7 +70,7 @@ if st.button("Process Files"):
         if df is None or df.empty:
             st.warning("No data found after processing.")
         else:
-            st.success(f"Processed {len(df)} rows.")
+            st.success(f"Found {len(df)} flights.")
             st.dataframe(df)
             # Convert to Excel in-memory
             output = io.BytesIO()
