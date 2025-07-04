@@ -50,7 +50,7 @@ st.title("CSV Merger and Filter")
 
 uploaded_files = st.file_uploader("Upload CSV or ZIP files", type=['csv', 'zip'], accept_multiple_files=True)
 
-filters = st.text_input("Exclude rows containing these codes in 'MSG Flight' (comma separated):", "SKL,LFT,ZKZ,ZKN,MDK,FDC")
+filters = st.text_input("Exclude rows containing these codes in 'MSG Flight' (comma separated):", "SKL,LFT,ZKZ,ZKN,MDK,FDC,N87")
 comment_filter = st.text_input("Exclude rows containing this text in 'Comment':", "Matching flight found")
 
 if st.button("Process Files"):
