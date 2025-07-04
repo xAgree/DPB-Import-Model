@@ -2,41 +2,49 @@ import streamlit as st
 import pandas as pd
 import zipfile
 import io
-import os
 
 def process_files(uploaded_files, filters, comment_filter):
     dfs = []
     first = True
 
     for uploaded_file in uploaded_files:
-        # Check if ZIP file
         if uploaded_file.name.endswith('.zip'):
+            # Handle ZIP files
             with zipfile.ZipFile(uploaded_file) as z:
                 for filename in z.namelist():
                     if filename.endswith('.csv'):
                         with z.open(filename) as f:
-                            if first:
-                                df = pd.read_csv(f)
-                                first = False
-                            else:
-                                df = pd.read_csv(f, header=None, skiprows=1)
-                                df.columns = dfs[0].columns
-                            dfs.append(df)
+                            try:
+                                if first:
+                                    df = pd.read_csv(f)
+                                    first = False
+                                else:
+                                    df = pd.read_csv(f, header=None, skiprows=1)
+                                    df.columns = dfs[0].columns
+                                dfs.append(df)
+                            except Exception as e:
+                                st.warning(f"Failed to read '{filename}' in zip: {e}")
+        elif uploaded_file.name.endswith('.csv'):
+            # Handle regular CSVs
+            try:
+                if first:
+                    df = pd.read_csv(uploaded_file)
+                    first = False
+                else:
+                    df = pd.read_csv(uploaded_file, header=None, skiprows=1)
+                    df.columns = dfs[0].columns
+                dfs.append(df)
+            except Exception as e:
+                st.warning(f"Failed to read '{uploaded_file.name}': {e}")
         else:
-            # Single CSV file
-            if first:
-                df = pd.read_csv(uploaded_file)
-                first = False
-            else:
-                df = pd.read_csv(uploaded_file, header=None, skiprows=1)
-                df.columns = dfs[0].columns
-            dfs.append(df)
+            st.warning(f"Unsupported file type: {uploaded_file.name}")
 
     if not dfs:
         return None
 
     combined_df = pd.concat(dfs, ignore_index=True)
 
+    # Apply filters
     if comment_filter:
         combined_df = combined_df[~combined_df['Comment'].str.contains(comment_filter, na=False)]
 
