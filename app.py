@@ -76,3 +76,4 @@ if st.button("Process Files"):
                 file_name="filtered_data.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
+st.dataframe(df)
