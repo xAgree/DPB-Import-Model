@@ -46,6 +46,7 @@ def process_files(uploaded_files, filters, comment_filter):
 
     # Apply filters
     if comment_filter:
+        pattern = '|'.join(comment_filter)
         combined_df = combined_df[~combined_df['Comment'].str.contains(comment_filter, na=False)]
 
     if filters:
