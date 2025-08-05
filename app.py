@@ -66,7 +66,8 @@ if st.button("Process Files"):
         st.warning("Please upload at least one CSV or ZIP file.")
     else:
         filter_list = [x.strip() for x in filters.split(',')] if filters else []
-        df = process_files(uploaded_files, filter_list, comment_filter)
+        comment_list = [x.strip() for x in comment_filter.split(',')] if filters else []
+        df = process_files(uploaded_files, filter_list, comment_list)
         if df is None or df.empty:
             st.warning("No data found after processing.")
         else:
